@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,6 +24,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 2533582274509556176L;
 	/** Identificador principal */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id")
     private Long usuarioId;
     /** Nombres del usuario */
@@ -36,6 +39,12 @@ public class Usuario implements Serializable {
     /** Edad del usuario */
     @Column(name = "edad")
     private int edad;
+    /** Dirección del usuario */
+    @Column(name = "direccion")
+    private String direccion;
+    /** cédula del usuario */
+    @Column(name = "cedula", unique = true)
+    private String cedula;
     
 	/**
 	 * @return the usuarioId
@@ -96,5 +105,29 @@ public class Usuario implements Serializable {
 	 */
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion() {
+		return direccion;
+	}
+	/**
+	 * @param direccion the direccion to set
+	 */
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	/**
+	 * @return the cedula
+	 */
+	public String getCedula() {
+		return cedula;
+	}
+	/**
+	 * @param cedula the cedula to set
+	 */
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 }
