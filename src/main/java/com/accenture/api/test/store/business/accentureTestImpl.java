@@ -6,14 +6,13 @@ package com.accenture.api.test.store.business;
 
 import static com.accenture.api.test.store.utilities.accentureTestConstants.EXCEPTION_DEV;
 import static com.accenture.api.test.store.utilities.accentureTestConstants.EXCEPTION_USER;
-import static com.accenture.api.test.store.utilities.accentureTestConstants.SUCCESS_DEV;
-import static com.accenture.api.test.store.utilities.accentureTestConstants.SUCCESS_USER;
 import static com.accenture.api.test.store.utilities.accentureTestConstants.MAX_VALUE;
 import static com.accenture.api.test.store.utilities.accentureTestConstants.MIN_VALUE;
+import static com.accenture.api.test.store.utilities.accentureTestConstants.SUCCESS_DEV;
+import static com.accenture.api.test.store.utilities.accentureTestConstants.SUCCESS_USER;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +49,6 @@ public class accentureTestImpl implements accentureTest{
 		Response<Void> response = null;
 		int total = 0;
 		try {
-			LocalDateTime searchDate = LocalDateTime.now().minusHours(5);
 			int totalCarShop = this.detailCarShop(purchase.getDetalle());
 			if(totalCarShop >= MIN_VALUE) {
 				Optional<Usuario> user = this.usuario.findByCedula(purchase.getCedula());
@@ -85,7 +83,6 @@ public class accentureTestImpl implements accentureTest{
 	@Override
 	public Response<Void> modifyPurchase(purchaseDTO purchase, Long purchaseId){
 		Response<Void> response = null;
-		int total = 0;
 		try {
 			int totalCarShop = this.detailCarShop(purchase.getDetalle());
 			if(totalCarShop >= MIN_VALUE) {
