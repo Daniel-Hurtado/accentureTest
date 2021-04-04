@@ -21,4 +21,9 @@ public interface compraRepository extends JpaRepository<Compra, Long>{
 	@Modifying
 	@Query("UPDATE Compra c SET total = :total where compraId = :id")
 	void updatePurchase(@Param("id") Long purchaseId, @Param("total") int total);	
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE Compra c where c.compraId = :id")
+	void deleteByPurchaseId(@Param("id") Long purchaseId);
 }

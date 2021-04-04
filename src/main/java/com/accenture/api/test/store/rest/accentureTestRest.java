@@ -4,6 +4,7 @@
 package com.accenture.api.test.store.rest;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,6 +48,12 @@ public class accentureTestRest {
 			@PathVariable(name = "purchase_id", required = true) Long purchaseId) { 
 		
 		return business.addProductsPurchase(purchase, purchaseId);
+	}
+	
+	@DeleteMapping(value = "/delete-purchase/{purchase_id}", produces = MediaType.APPLICATION_JSON_VALUE) 
+	public Response<Void> deletePurchase(@PathVariable(name = "purchase_id", required = true) Long purchaseId) { 
+		
+		return business.deletePurchase(purchaseId);
 	}
 	
 }

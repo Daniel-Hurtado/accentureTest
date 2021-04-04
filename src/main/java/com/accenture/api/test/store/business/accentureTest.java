@@ -14,4 +14,5 @@ public interface accentureTest {
 	Response<Void> purchase(purchaseDTO purchase);
 	Response<Void> modifyPurchase(purchaseDTO purchase, Long purchaseId);
 	Response<Void> addProductsPurchase(purchaseDTO purchase, Long purchaseId);
+	Response<Void> deletePurchase(Long purchaseId);
 }

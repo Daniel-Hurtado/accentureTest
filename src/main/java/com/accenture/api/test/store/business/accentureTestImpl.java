@@ -149,6 +149,32 @@ public class accentureTestImpl implements accentureTest{
 		return response;
 	}
 	
+	@Override
+	public Response<Void> deletePurchase(Long purchaseId){
+		Response<Void> response = null;
+		try {
+			Optional<Compra> buy = this.compra.findById(purchaseId);
+			if(!buy.isEmpty()) {
+				Compra buyOn = buy.get();
+				int totalPurchase = this.getDetailPurchase(purchaseId);
+				LocalDateTime searchDate = LocalDateTime.now().minusHours(12);
+				if(buyOn.getFechaCompra().toLocalDateTime().isAfter(searchDate)) {
+					this.compra.deleteByPurchaseId(buyOn.getCompraId());
+					response = new Response<>(HttpStatus.OK.value(), SUCCESS_USER, SUCCESS_DEV, null, "El pedido ha sido eliminado");
+				} else {
+					this.compra.deleteByPurchaseId(buyOn.getCompraId());
+					response = new Response<>(HttpStatus.OK.value(), SUCCESS_USER, SUCCESS_DEV, null, "Debido a que el pedido fue creado hace más de 12 horas se debe realizar un cobro de: "+(totalPurchase*0.10));
+				}
+			} else {
+				response = new Response<>(HttpStatus.BAD_REQUEST.value(), EXCEPTION_USER, EXCEPTION_DEV, "400", "No se encontró la compra con el id indicado.");
+			}
+		} catch (Exception e) {
+			response = new Response<>(HttpStatus.BAD_REQUEST.value(), EXCEPTION_USER, EXCEPTION_DEV, "400", e.getMessage());
+		}
+		
+		return response;
+	}
+	
 	public int createPurchase(purchaseDTO purchase, Usuario user, int totalCarShop) {
 		int total = 0;
 		try {
